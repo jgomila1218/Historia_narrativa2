@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Bosc de les Ombres Mortes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-fons: #0a0a0a;
+            --color-text: #c4b8a8;
+            --color-text-dim: #7a6f5f;
+            --color-accent: #5a7a6a;
+            --color-llum: #8a9a8a;
+            --color-sombra: #1a1a1a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--color-fons);
+            color: var(--color-text);
+            line-height: 1.9;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        /* ========== PORTADA ========== */
+        .portada {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .portada-imatge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/portada.jpg') center/cover no-repeat;
+            filter: brightness(0.7) contrast(1.1);
+            z-index: 1;
+        }
+
+        .portada-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(10,10,10,0.3) 0%,
+                rgba(10,10,10,0.6) 50%,
+                var(--color-fons) 100%
+            );
+            z-index: 2;
+        }
+
+        .portada-contingut {
+            position: relative;
+            z-index: 3;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .portada h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #d4c9b8;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            line-height: 1.2;
+        }
+
+        .portada .subtitol {
+            font-size: 1.3rem;
+            color: var(--color-text-dim);
+            font-style: italic;
+            margin-bottom: 3rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .fletxa-baix {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: rebot 2s infinite;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .fletxa-baix:hover {
+            opacity: 1;
+        }
+
+        @keyframes rebot {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-7px); }
+        }
+
+        /* ========== HISTÒRIA ========== */
+        .historia {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .capitol {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .capitol.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .capitol h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--color-llum);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-sombra);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .capitol h2::before {
+            content: "◆";
+            color: var(--color-accent);
+            font-size: 0.8rem;
+        }
+
+        .capitol p {
+            margin-bottom: 1.8rem;
+            text-align: justify;
+            hyphens: auto;
+            color: var(--color-text);
+        }
+
+        .capitol p:first-of-type::first-letter {
+            font-size: 3.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            color: var(--color-llum);
+            font-family: 'Cinzel', serif;
+        }
+
+        /* ========== IMATGES ========== */
+        .moment-visual {
+            margin: 3rem 0;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 1.2s ease;
+        }
+
+        .moment-visual.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .moment-visual img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            filter: sepia(20%) contrast(1.05);
+            transition: filter 0.5s;
+        }
+
+        .moment-visual:hover img {
+            filter: sepia(10%) contrast(1.1) brightness(1.05);
+        }
+
+        .moment-visual::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid rgba(90,122,106,0.2);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .peu-imatge {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-dim);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* ========== EFECTES ATMOSFÈRICS ========== */
+        .boira {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(100,120,100,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(100,120,100,0.02) 0%, transparent 50%);
+            animation: drift 30s infinite linear;
+            z-index: 1000;
+            opacity: 0.6;
+        }
+
+        @keyframes drift {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0%); }
+        }
+
+        .particules {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.3;
+        }
+
+        /* ========== CONTROLS D'ÀUDIO ========== */
+        .audio-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+            background: rgba(20, 25, 20, 0.95);
+            border: 1px solid var(--color-accent);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(90,122,106,0.3);
+        }
+
+        .audio-control.active {
+            background: rgba(90,122,106,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(90,122,106,0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(90,122,106,0); }
+        }
+
+        .audio-control svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-llum);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .audio-control.mute svg {
+            stroke: var(--color-text-dim);
+        }
+
+        .indicador-audio {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: rgba(20, 25, 20, 0.9);
+            padding: 0.8rem 1.2rem;
+            border-radius: 4px;
+            border: 1px solid var(--color-sombra);
+            font-size: 0.85rem;
+            color: var(--color-text-dim);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            pointer-events: none;
+            z-index: 2000;
+        }
+
+        .indicador-audio.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== FI DE LA HISTÒRIA ========== */
+        .epilog {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--color-sombra);
+            margin-top: 3rem;
+            font-style: italic;
+            color: var(--color-text-dim);
+        }
+
+        .epilog::before {
+            content: "❦";
+            display: block;
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 2rem;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 600px) {
+            .historia {
+                padding: 2rem 1.5rem;
+            }
+
+            .capitol p:first-of-type::first-letter {
+                font-size: 2.5rem;
+            }
+
+            .audio-control {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        /* Scrollbar personalitzada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-fons);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-sombra);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Efectes atmosfèrics -->
+    <div class="boira"></div>
+    <canvas class="particules" id="particules"></canvas>
+
+    <!-- PORTADA -->
+    <header class="portada" id="inici">
+        <div class="portada-imatge"></div>
+        <div class="portada-overlay"></div>
+        <div class="portada-contingut">
+            <h1>El Bosc de les Ombres Mortes</h1>
+            <p class="subtitol">Una història de por, perseverança i transformació</p>
+        </div>
+        <div class="fletxa-baix" onclick="document.getElementById('historia').scrollIntoView({behavior: 'smooth'})">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- HISTÒRIA -->
+    <main class="historia" id="historia">
+
+        <!-- CAPÍTOL 1: La Pèrdua -->
+        <article class="capitol" data-cap="1">
+            <h2>La Pèrdua</h2>
+
+            <p>L'Elna no sabia exactament quan s'havia perdut. No hi havia hagut un trencament brusc, ni un camí que s'acabés de cop. Simplement, la claror s'havia tornat d'un verd malaltís i la sentor de molsa humida s'havia tornat tan densa que semblava que es pogués mastegar. Als seus dotze anys, l'Elna sabia que el bosc no la volia devorar, però sí que volia que es quedés. Volia que fos una estàtua més en aquell museu de fusta i silenci.</p>
+
+            <p>L'aire era immòbil, d'una quietud artificial. A terra, les fulles seques no cruixien sota els seus peus; s'enfonsaven en un llit de podridura silenciosa. Malgrat la manca de vent, les branques més altes de les alzines es cargolaven entre elles, com dits d'ancians que miren de recordar una carícia.</p>
+
+            <!-- IMATGE 1: El bedoll -->
+            <figure class="moment-visual" data-img="1">
+                <img src="assets/images/moment1.jpg" alt="El bedoll amb l'ull">
+                <figcaption class="peu-imatge">El bedoll que observa</figcaption>
+            </figure>
+
+            <p>L'Elna es va aturar davant d'un bedoll de tronc blanc tacat de negre. Ja l'havia vist. Tres vegades. El reconeixia per la ferida en forma d'ull que s'obria a l'escorça, una mirada de fusta que semblava jutjar la seva indecisió.</p>
+
+            <p>—No estic fent cercles —va xiuxiuejar, més per sentir la seva pròpia veu que per convicció.</p>
+
+            <p>Però el bosc li va respondre amb la seva primera trampa. La seva pròpia veu va tornar a ella, però deformada. No era un eco, era una paròdia.</p>
+
+            <p><em>"...no estic... no sóc... no puc..."</em>, van moure's les ombres entre els arbustos.</p>
+
+            <p>L'Elna va tancar els ulls. Aquí és on la seva màgia, aquella flama tènue que el seu avi anomenava La Perseverança, començava a bategar sota la seva pell. No era una màgia de llum radiant ni de boles de foc; era una resistència sorda, una capacitat de filtrar la realitat de l'engany. Va posar la mà sobre el seu pit i va sentir el seu propi cor, l'únic rellotge fiable en aquell indret on el temps semblava haver-se dissolt en la boira.</p>
+        </article>
+
+        <!-- CAPÍTOL 2: El Mirall de les Veus -->
+        <article class="capitol" data-cap="2">
+            <h2>El Mirall de les Veus</h2>
+
+            <p>Mentre caminava, la bruma va començar a filtrar-se entre els troncs com un gas fred. No era blanca, sinó d'un gris cendra que ho desdibuixava tot. L'Elna va veure siluetes. Allà, entre dos roures colossals, semblava haver-hi la figura de la seva mare, d'esquena, cosint amb fils que eren teranyines.</p>
+
+            <p>—Mare? —va dir, tot i sabent que era impossible.</p>
+
+            <p><em>"Encara no ets prou bona, Elna"</em>, va dir la figura sense girar-se. La veu no venia de la silueta, sinó de sota terra, com si les arrels parlessin. <em>"T'has perdut perquè sempre has tingut por de decidir. Ets un ocell sense ales, una bruixa sense vareta. Què penses fer quan la nit caigui del tot?"</em></p>
+
+            <!-- IMATGE 2: La figura -->
+            <figure class="moment-visual" data-img="2">
+                <img src="assets/images/moment2.jpg" alt="La figura de la mare">
+                <figcaption class="peu-imatge">La trampa del bosc</figcaption>
+            </figure>
+
+            <p>L'Elna va sentir una punxada al pit, una fredor que no era climàtica. Era el dubte. El bosc no utilitzava urpes, utilitzava els seus propis records, les inseguretats que guardava sota el llit abans d'anar a dormir. Les veus es van multiplicar. Eren les veus dels nens de la vila rient-se d'ella, la veu del seu mestre dient que la seva màgia era <em>"massa subtil per ser útil"</em>.</p>
+
+            <p>—Prou —va dir l'Elna, plantant els peus a terra.</p>
+
+            <p>Va activar la seva percepció. Va deixar d'escoltar les paraules i va començar a "sentir" l'origen del so. No eren veus humanes; era el fregadís de les fulles seques manipulat per la seva pròpia por. Amb un esforç de voluntat, va imaginar una paret de vidre transparent al voltant del seu cor. Les veus colpejaven el vidre i es trencaven com onades contra un penya-segat.</p>
+
+            <p>El bosc, enrabiat per la seva resistència, va canviar de tàctica. Els arbres van començar a moure's. No corrien, però quan l'Elna parpellejava, els troncs s'havien desplaçat uns centímetres, tancant l'espai, reduint el camí fins que gairebé havia de caminar de costat.</p>
+        </article>
+
+        <!-- CAPÍTOL 3: La Prova del Buit -->
+        <article class="capitol" data-cap="3">
+            <h2>La Prova del Buit</h2>
+
+            <p>Va arribar a una clariana on la llum del sol, o el que en quedava, es filtrava en raigs morats i oblics. Al centre, un estany d'aigües negres i immòbils l'esperava. L'Elna sabia que havia d'arribar a l'altre costat, però no hi havia pont, i l'aigua semblava no tenir fons.</p>
+
+            <p>Es va asseure a la vora. De sobte, la soledat la va colpejar amb tota la seva força. No hi havia ningú per salvar-la. Si es quedava allà, es convertiria en una part més del paisatge, una estàtua de molsa i ossos. La tristesa era una boira més pesant que la del bosc. Va recordar totes les vegades que s'havia sentit invisible al món exterior.</p>
+
+            <!-- IMATGE 3: L'estany -->
+            <figure class="moment-visual" data-img="3">
+                <img src="assets/images/moment3.jpg" alt="L'estany negre">
+                <figcaption class="peu-imatge">El mirall de les pors</figcaption>
+            </figure>
+
+            <p><em>"Si ningú et veu, existeixes realment?"</em>, va preguntar el bosc amb un xiuxiueig de vent inexistent.</p>
+
+            <p>L'Elna va mirar el seu reflex a l'aigua negra. No va veure la seva cara, sinó un buit. Durant un moment, va estar a punt de deixar-se caure, d'acceptar que el bosc tenia raó. Però llavors va notar una petita vibració als dits. Era la seva màgia de percepció, captant alguna cosa que el bosc intentava amagar.</p>
+
+            <p>Sota la capa de por i sota l'aigua negra, hi havia una veritat: el bosc no era un enemic a vèncer, sinó un mirall que calia travessar.</p>
+
+            <p>Va tancar els ulls i, en lloc d'intentar veure amb la vista, va veure amb la seva resistència. Va percebre que el camí no estava "davant" seu, sinó "dins". El bosc s'alimentava de la seva reacció. Si ella deixava de reaccionar amb por, el bosc perdia la seva forma.</p>
+
+            <p>Va fer un pas cap a l'aigua. No es va enfonsar. La superfície era sòlida com el gel, malgrat que encara semblava líquida i fosca. Va caminar sobre el mirall de les seves pròpies pors, cada pas una afirmació de la seva existència. No necessitava que ningú la vegués per saber que era allà.</p>
+        </article>
+
+        <!-- CAPÍTOL 4: La Sortida -->
+        <article class="capitol" data-cap="4">
+            <h2>La Sortida sense Retorn</h2>
+
+            <p>Quan va arribar a l'altra riba, el bosc va fer un últim intent. Els arbres van començar a plorar una saba negra i espessa, i l'aire es va tornar tan fred que l'alè de l'Elna es cristal·litzava davant seu. Però ella ja no mirava les ombres. Mantenia la seva màgia activa, una armadura invisible que repel·lia la desesperació.</p>
+
+            <p>A poc a poc, la densitat de la vegetació va anar disminuint. La llum va canviar d'aquell lila opressiu a un gris albada, més natural, més honest. Els ocells, els de veritat, van començar a cantar en algun lloc llunyà.</p>
+
+            <p>L'Elna va sortir del perímetre dels arbres més antics i es va trobar en un prat de gramínies altes, banyades per la rosada. Es va girar per mirar enrere. El bosc semblava ara una taca fosca i silenciosa sota el cel de matinada, imperturbable, guardant els seus secrets per al pròxim viatger.</p>
+
+            <p>No se sentia victoriosa en el sentit clàssic. No portava cap tresor, ni havia après cap conjur nou. Però, quan es va mirar les mans, va notar que les puntes dels seus dits tenien una lleu claror argentada que no marxava. La seva màgia ja no era només una eina de defensa; s'havia integrat en ella, transformant la seva manera de veure el món.</p>
+
+            <p>Havia entrat al bosc com una nena que temia la seva pròpia ombra i en sortia com algú que sabia que l'ombra era només una part de la llum. El camí cap a casa encara era llarg i el bosc de les veus seguiria allà, esperant a la frontera de la realitat. L'Elna va començar a caminar, sabent que, encara que el misteri del bosc no s'hagués resolt, ella ja no era la mateixa que s'hi havia perdut.</p>
+        </article>
+
+        <div class="epilog">
+            <p>Fi</p>
+        </div>
+
+    </main>
+
+    <!-- Control d'àudio -->
+    <div class="audio-control" id="audioBtn" title="Activar/Desactivar so ambient">
+        <svg id="icon-sound" viewBox="0 0 24 24">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg id="icon-mute" viewBox="0 0 24 24" style="display: none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+    </div>
+
+    <div class="indicador-audio" id="audioIndicator">
+        So ambient activat
+    </div>
+
+    <!-- Àudio -->
+    <audio id="bgAudio" loop>
+        <source src="assets/audio/soroll-temps.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // ========== AUDIO ==========
+        const audioBtn = document.getElementById('audioBtn');
+        const bgAudio = document.getElementById('bgAudio');
+        const iconSound = document.getElementById('icon-sound');
+        const iconMute = document.getElementById('icon-mute');
+        const indicator = document.getElementById('audioIndicator');
+        let isPlaying = false;
+
+        audioBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgAudio.pause();
+                audioBtn.classList.remove('active');
+                audioBtn.classList.add('mute');
+                iconSound.style.display = 'block';
+                iconMute.style.display = 'none';
+            } else {
+                bgAudio.play().then(() => {
+                    audioBtn.classList.add('active');
+                    audioBtn.classList.remove('mute');
+                    iconSound.style.display = 'none';
+                    iconMute.style.display = 'block';
+                    indicator.classList.add('visible');
+                    setTimeout(() => indicator.classList.remove('visible'), 2000);
+                }).catch(e => {
+                    console.log('Autoplay blocked:', e);
+                });
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // ========== ANIMACIONS SCROLL ==========
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observar capítols
+        document.querySelectorAll('.capitol').forEach(capitol => {
+            observer.observe(capitol);
+        });
+
+        // Observar imatges
+        document.querySelectorAll('.moment-visual').forEach(img => {
+            observer.observe(img);
+        });
+
+        // ========== PARTÍCULES (efecte de pols/boira) ==========
+        const canvas = document.getElementById('particules');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particules = [];
+        const numParticules = 25;
+
+        class Particula {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width ||
+                    this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(140, 160, 140, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < numParticules; i++) {
+            particules.push(new Particula());
+        }
+
+        function animateParticules() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particules.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticules);
+        }
+        animateParticules();
+
+        // ========== EFECTE PARAL·LAXI PORTADA ==========
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const portada = document.querySelector('.portada-imatge');
+            if (scrolled < window.innerHeight) {
+                portada.style.transform = `translateY(${scrolled * 0.5}px) scale(${1 + scrolled * 0.0005})`;
+            }
+        });
+    </script>
+
+</body>
+</html>
