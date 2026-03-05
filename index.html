@@ -277,7 +277,7 @@
             box-shadow: 0 0 30px rgba(90,122,106,0.3);
         }
 
-        .audio-control.mute {
+        .audio-control.active {
             background: rgba(90,122,106,0.2);
             animation: pulse 2s infinite;
         }
@@ -295,7 +295,7 @@
             stroke-width: 2;
         }
 
-        .audio-control.active svg {
+        .audio-control.mute svg {
             stroke: var(--color-text-dim);
         }
 
@@ -522,8 +522,8 @@
         // ========== AUDIO ==========
         const audioBtn = document.getElementById('audioBtn');
         const bgAudio = document.getElementById('bgAudio');
-        const iconSound = document.getElementById('icon-sound');
-        const iconMute = document.getElementById('icon-mute');
+        const iconMute = document.getElementById('icon-sound');
+        const iconSound = document.getElementById('icon-mute');
         const indicator = document.getElementById('audioIndicator');
         let isPlaying = false;
 
