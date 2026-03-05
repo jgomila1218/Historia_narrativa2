@@ -528,23 +528,26 @@
         let isPlaying = false;
 
         audioBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                bgAudio.pause();
-                audioBtn.classList.remove('active');
-                audioBtn.classList.add('mute');
-                iconSound.style.display = 'none';
-                iconMute.style.display = 'block';
-            } else {
-                bgAudio.play().then(() => {
-                    audioBtn.classList.add('active');
-                    audioBtn.classList.remove('mute');
-                    iconSound.style.display = 'block';
-                    iconMute.style.display = 'none';
-                    indicator.classList.add('visible');
-                    setTimeout(() => indicator.classList.remove('visible'), 2000);
-                }).catch(e => {
-                    console.log('Autoplay blocked:', e);
-                });
+    if (isPlaying) {
+        bgAudio.pause();
+        audioBtn.classList.remove('active');
+        audioBtn.classList.add('mute');
+        iconSound.style.display = 'block';        // ← CAMBIA A: 'none'
+        iconMute.style.display = 'none';            // ← CAMBIA A: 'block'
+    } else {
+        bgAudio.play().then(() => {
+            audioBtn.classList.add('active');
+            audioBtn.classList.remove('mute');
+            iconSound.style.display = 'none';       // ← CAMBIA A: 'block'
+            iconMute.style.display = 'block';       // ← CAMBIA A: 'none'
+            indicator.classList.add('visible');
+            setTimeout(() => indicator.classList.remove('visible'), 2000);
+        }).catch(e => {
+            console.log('Autoplay blocked:', e);
+        });
+    }
+    isPlaying = !isPlaying;
+});
             }
             isPlaying = !isPlaying;
         });
