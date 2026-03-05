@@ -522,8 +522,8 @@
         // ========== AUDIO ==========
         const audioBtn = document.getElementById('audioBtn');
         const bgAudio = document.getElementById('bgAudio');
-        const iconMute = document.getElementById('icon-sound');
-        const iconSound = document.getElementById('icon-mute');
+        const iconSound = document.getElementById('icon-sound');
+        const iconmute = document.getElementById('icon-mute');
         const indicator = document.getElementById('audioIndicator');
         let isPlaying = false;
 
@@ -532,14 +532,14 @@
                 bgAudio.pause();
                 audioBtn.classList.remove('active');
                 audioBtn.classList.add('mute');
-                iconSound.style.display = 'block';
-                iconMute.style.display = 'none';
+                iconSound.style.display = 'none';
+                iconMute.style.display = 'block';
             } else {
                 bgAudio.play().then(() => {
                     audioBtn.classList.add('active');
                     audioBtn.classList.remove('mute');
-                    iconSound.style.display = 'none';
-                    iconMute.style.display = 'block';
+                    iconSound.style.display = 'block';
+                    iconMute.style.display = 'none';
                     indicator.classList.add('visible');
                     setTimeout(() => indicator.classList.remove('visible'), 2000);
                 }).catch(e => {
