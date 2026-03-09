@@ -121,11 +121,63 @@
             60% { transform: translateX(-50%) translateY(-7px); }
         }
 
+        /* ========== PESTANYES D'IDIOMES ========== */
+        .pestanyes-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-sombra);
+            padding: 1rem 0;
+        }
+
+        .pestanyes {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .pestanya {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--color-sombra);
+            color: var(--color-text-dim);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        .pestanya:hover {
+            border-color: var(--color-accent);
+            color: var(--color-text);
+        }
+
+        .pestanya.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #d4c9b8;
+        }
+
         /* ========== HISTÒRIA ========== */
         .historia {
             max-width: 700px;
             margin: 0 auto;
             padding: 4rem 2rem;
+        }
+
+        .idioma-content {
+            display: none;
+        }
+
+        .idioma-content.active {
+            display: block;
         }
 
         .capitol {
@@ -355,6 +407,15 @@
                 width: 50px;
                 height: 50px;
             }
+
+            .pestanyes {
+                gap: 0.3rem;
+            }
+
+            .pestanya {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
         }
 
         /* Scrollbar personalitzada */
@@ -397,101 +458,301 @@
         </div>
     </header>
 
+    <!-- PESTANYES D'IDIOMES -->
+    <div class="pestanyes-container">
+        <div class="pestanyes">
+            <button class="pestanya active" data-idioma="ca">Català</button>
+            <button class="pestanya" data-idioma="es">Castellano</button>
+            <button class="pestanya" data-idioma="en">English</button>
+        </div>
+    </div>
+
     <!-- HISTÒRIA -->
     <main class="historia" id="historia">
 
-        <!-- CAPÍTOL 1: La Pèrdua -->
-        <article class="capitol" data-cap="1">
-            <h2>La Pèrdua</h2>
+        <!-- CATALÀ -->
+        <div class="idioma-content active" id="content-ca">
+            <!-- CAPÍTOL 1: La Pèrdua -->
+            <article class="capitol" data-cap="1">
+                <h2>La Pèrdua</h2>
 
-            <p>L'Elna no sabia exactament quan s'havia perdut. No hi havia hagut un trencament brusc, ni un camí que s'acabés de cop. Simplement, la claror s'havia tornat d'un verd malaltís i la sentor de molsa humida s'havia tornat tan densa que semblava que es pogués mastegar. Als seus dotze anys, l'Elna sabia que el bosc no la volia devorar, però sí que volia que es quedés. Volia que fos una estàtua més en aquell museu de fusta i silenci.</p>
+                <p>L'Elna no sabia exactament quan s'havia perdut. No hi havia hagut un trencament brusc, ni un camí que s'acabés de cop. Simplement, la claror s'havia tornat d'un verd malaltís i la sentor de molsa humida s'havia tornat tan densa que semblava que es pogués mastegar. Als seus dotze anys, l'Elna sabia que el bosc no la volia devorar, però sí que volia que es quedés. Volia que fos una estàtua més en aquell museu de fusta i silenci.</p>
 
-            <p>L'aire era immòbil, d'una quietud artificial. A terra, les fulles seques no cruixien sota els seus peus; s'enfonsaven en un llit de podridura silenciosa. Malgrat la manca de vent, les branques més altes de les alzines es cargolaven entre elles, com dits d'ancians que miren de recordar una carícia.</p>
+                <p>L'aire era immòbil, d'una quietud artificial. A terra, les fulles seques no cruixien sota els seus peus; s'enfonsaven en un llit de podridura silenciosa. Malgrat la manca de vent, les branques més altes de les alzines es cargolaven entre elles, com dits d'ancians que miren de recordar una carícia.</p>
 
-            <!-- IMATGE 1: El bedoll -->
-            <figure class="moment-visual" data-img="1">
-                <img src="assets/images/moment1.jpg" alt="El bedoll amb l'ull">
-                <figcaption class="peu-imatge">El bedoll que observa</figcaption>
-            </figure>
+                <!-- IMATGE 1: El bedoll -->
+                <figure class="moment-visual" data-img="1">
+                    <img src="assets/images/moment1.jpg" alt="El bedoll amb l'ull">
+                    <figcaption class="peu-imatge">El bedoll que observa</figcaption>
+                </figure>
 
-            <p>L'Elna es va aturar davant d'un bedoll de tronc blanc tacat de negre. Ja l'havia vist. Tres vegades. El reconeixia per la ferida en forma d'ull que s'obria a l'escorça, una mirada de fusta que semblava jutjar la seva indecisió.</p>
+                <p>L'Elna es va aturar davant d'un bedoll de tronc blanc tacat de negre. Ja l'havia vist. Tres vegades. El reconeixia per la ferida en forma d'ull que s'obria a l'escorça, una mirada de fusta que semblava jutjar la seva indecisió.</p>
 
-            <p>—No estic fent cercles —va xiuxiuejar, més per sentir la seva pròpia veu que per convicció.</p>
+                <p>—No estic fent cercles —va xiuxiuejar, més per sentir la seva pròpia veu que per convicció.</p>
 
-            <p>Però el bosc li va respondre amb la seva primera trampa. La seva pròpia veu va tornar a ella, però deformada. No era un eco, era una paròdia.</p>
+                <p>Però el bosc li va respondre amb la seva primera trampa. La seva pròpia veu va tornar a ella, però deformada. No era un eco, era una paròdia.</p>
 
-            <p><em>"...no estic... no sóc... no puc..."</em>, van moure's les ombres entre els arbustos.</p>
+                <p><em>"...no estic... no sóc... no puc..."</em>, van moure's les ombres entre els arbustos.</p>
 
-            <p>L'Elna va tancar els ulls. Aquí és on la seva màgia, aquella flama tènue que el seu avi anomenava La Perseverança, començava a bategar sota la seva pell. No era una màgia de llum radiant ni de boles de foc; era una resistència sorda, una capacitat de filtrar la realitat de l'engany. Va posar la mà sobre el seu pit i va sentir el seu propi cor, l'únic rellotge fiable en aquell indret on el temps semblava haver-se dissolt en la boira.</p>
-        </article>
+                <p>L'Elna va tancar els ulls. Aquí és on la seva màgia, aquella flama tènue que el seu avi anomenava La Perseverança, començava a bategar sota la seva pell. No era una màgia de llum radiant ni de boles de foc; era una resistència sorda, una capacitat de filtrar la realitat de l'engany. Va posar la mà sobre el seu pit i va sentir el seu propi cor, l'únic rellotge fiable en aquell indret on el temps semblava haver-se dissolt en la boira.</p>
+            </article>
 
-        <!-- CAPÍTOL 2: El Mirall de les Veus -->
-        <article class="capitol" data-cap="2">
-            <h2>El Mirall de les Veus</h2>
+            <!-- CAPÍTOL 2: El Mirall de les Veus -->
+            <article class="capitol" data-cap="2">
+                <h2>El Mirall de les Veus</h2>
 
-            <p>Mentre caminava, la bruma va començar a filtrar-se entre els troncs com un gas fred. No era blanca, sinó d'un gris cendra que ho desdibuixava tot. L'Elna va veure siluetes. Allà, entre dos roures colossals, semblava haver-hi la figura de la seva mare, d'esquena, cosint amb fils que eren teranyines.</p>
+                <p>Mentre caminava, la bruma va començar a filtrar-se entre els troncs com un gas fred. No era blanca, sinó d'un gris cendra que ho desdibuixava tot. L'Elna va veure siluetes. Allà, entre dos roures colossals, semblava haver-hi la figura de la seva mare, d'esquena, cosint amb fils que eren teranyines.</p>
 
-            <p>—Mare? —va dir, tot i sabent que era impossible.</p>
+                <p>—Mare? —va dir, tot i sabent que era impossible.</p>
 
-            <p><em>"Encara no ets prou bona, Elna"</em>, va dir la figura sense girar-se. La veu no venia de la silueta, sinó de sota terra, com si les arrels parlessin. <em>"T'has perdut perquè sempre has tingut por de decidir. Ets un ocell sense ales, una bruixa sense vareta. Què penses fer quan la nit caigui del tot?"</em></p>
+                <p><em>"Encara no ets prou bona, Elna"</em>, va dir la figura sense girar-se. La veu no venia de la silueta, sinó de sota terra, com si les arrels parlessin. <em>"T'has perdut perquè sempre has tingut por de decidir. Ets un ocell sense ales, una bruixa sense vareta. Què penses fer quan la nit caigui del tot?"</em></p>
 
-            <!-- IMATGE 2: La figura -->
-            <figure class="moment-visual" data-img="2">
-                <img src="assets/images/moment2.jpg" alt="La figura de la mare">
-                <figcaption class="peu-imatge">La trampa del bosc</figcaption>
-            </figure>
+                <!-- IMATGE 2: La figura -->
+                <figure class="moment-visual" data-img="2">
+                    <img src="assets/images/moment2.jpg" alt="La figura de la mare">
+                    <figcaption class="peu-imatge">La trampa del bosc</figcaption>
+                </figure>
 
-            <p>L'Elna va sentir una punxada al pit, una fredor que no era climàtica. Era el dubte. El bosc no utilitzava urpes, utilitzava els seus propis records, les inseguretats que guardava sota el llit abans d'anar a dormir. Les veus es van multiplicar. Eren les veus dels nens de la vila rient-se d'ella, la veu del seu mestre dient que la seva màgia era <em>"massa subtil per ser útil"</em>.</p>
+                <p>L'Elna va sentir una punxada al pit, una fredor que no era climàtica. Era el dubte. El bosc no utilitzava urpes, utilitzava els seus propis records, les inseguretats que guardava sota el llit abans d'anar a dormir. Les veus es van multiplicar. Eren les veus dels nens de la vila rient-se d'ella, la veu del seu mestre dient que la seva màgia era <em>"massa subtil per ser útil"</em>.</p>
 
-            <p>—Prou —va dir l'Elna, plantant els peus a terra.</p>
+                <p>—Prou —va dir l'Elna, plantant els peus a terra.</p>
 
-            <p>Va activar la seva percepció. Va deixar d'escoltar les paraules i va començar a "sentir" l'origen del so. No eren veus humanes; era el fregadís de les fulles seques manipulat per la seva pròpia por. Amb un esforç de voluntat, va imaginar una paret de vidre transparent al voltant del seu cor. Les veus colpejaven el vidre i es trencaven com onades contra un penya-segat.</p>
+                <p>Va activar la seva percepció. Va deixar d'escoltar les paraules i va començar a "sentir" l'origen del so. No eren veus humanes; era el fregadís de les fulles seques manipulat per la seva pròpia por. Amb un esforç de voluntat, va imaginar una paret de vidre transparent al voltant del seu cor. Les veus colpejaven el vidre i es trencaven com onades contra un penya-segat.</p>
 
-            <p>El bosc, enrabiat per la seva resistència, va canviar de tàctica. Els arbres van començar a moure's. No corrien, però quan l'Elna parpellejava, els troncs s'havien desplaçat uns centímetres, tancant l'espai, reduint el camí fins que gairebé havia de caminar de costat.</p>
-        </article>
+                <p>El bosc, enrabiat per la seva resistència, va canviar de tàctica. Els arbres van començar a moure's. No corrien, però quan l'Elna parpellejava, els troncs s'havien desplaçat uns centímetres, tancant l'espai, reduint el camí fins que gairebé havia de caminar de costat.</p>
+            </article>
 
-        <!-- CAPÍTOL 3: La Prova del Buit -->
-        <article class="capitol" data-cap="3">
-            <h2>La Prova del Buit</h2>
+            <!-- CAPÍTOL 3: La Prova del Buit -->
+            <article class="capitol" data-cap="3">
+                <h2>La Prova del Buit</h2>
 
-            <p>Va arribar a una clariana on la llum del sol, o el que en quedava, es filtrava en raigs morats i oblics. Al centre, un estany d'aigües negres i immòbils l'esperava. L'Elna sabia que havia d'arribar a l'altre costat, però no hi havia pont, i l'aigua semblava no tenir fons.</p>
+                <p>Va arribar a una clariana on la llum del sol, o el que en quedava, es filtrava en raigs morats i oblics. Al centre, un estany d'aigües negres i immòbils l'esperava. L'Elna sabia que havia d'arribar a l'altre costat, però no hi havia pont, i l'aigua semblava no tenir fons.</p>
 
-            <p>Es va asseure a la vora. De sobte, la soledat la va colpejar amb tota la seva força. No hi havia ningú per salvar-la. Si es quedava allà, es convertiria en una part més del paisatge, una estàtua de molsa i ossos. La tristesa era una boira més pesant que la del bosc. Va recordar totes les vegades que s'havia sentit invisible al món exterior.</p>
+                <p>Es va asseure a la vora. De sobte, la soledat la va colpejar amb tota la seva força. No hi havia ningú per salvar-la. Si es quedava allà, es convertiria en una part més del paisatge, una estàtua de molsa i ossos. La tristesa era una boira més pesant que la del bosc. Va recordar totes les vegades que s'havia sentit invisible al món exterior.</p>
 
-            <!-- IMATGE 3: L'estany -->
-            <figure class="moment-visual" data-img="3">
-                <img src="assets/images/moment3.jpg" alt="L'estany negre">
-                <figcaption class="peu-imatge">El mirall de les pors</figcaption>
-            </figure>
+                <!-- IMATGE 3: L'estany -->
+                <figure class="moment-visual" data-img="3">
+                    <img src="assets/images/moment3.jpg" alt="L'estany negre">
+                    <figcaption class="peu-imatge">El mirall de les pors</figcaption>
+                </figure>
 
-            <p><em>"Si ningú et veu, existeixes realment?"</em>, va preguntar el bosc amb un xiuxiueig de vent inexistent.</p>
+                <p><em>"Si ningú et veu, existeixes realment?"</em>, va preguntar el bosc amb un xiuxiueig de vent inexistent.</p>
 
-            <p>L'Elna va mirar el seu reflex a l'aigua negra. No va veure la seva cara, sinó un buit. Durant un moment, va estar a punt de deixar-se caure, d'acceptar que el bosc tenia raó. Però llavors va notar una petita vibració als dits. Era la seva màgia de percepció, captant alguna cosa que el bosc intentava amagar.</p>
+                <p>L'Elna va mirar el seu reflex a l'aigua negra. No va veure la seva cara, sinó un buit. Durant un moment, va estar a punt de deixar-se caure, d'acceptar que el bosc tenia raó. Però llavors va notar una petita vibració als dits. Era la seva màgia de percepció, captant alguna cosa que el bosc intentava amagar.</p>
 
-            <p>Sota la capa de por i sota l'aigua negra, hi havia una veritat: el bosc no era un enemic a vèncer, sinó un mirall que calia travessar.</p>
+                <p>Sota la capa de por i sota l'aigua negra, hi havia una veritat: el bosc no era un enemic a vèncer, sinó un mirall que calia travessar.</p>
 
-            <p>Va tancar els ulls i, en lloc d'intentar veure amb la vista, va veure amb la seva resistència. Va percebre que el camí no estava "davant" seu, sinó "dins". El bosc s'alimentava de la seva reacció. Si ella deixava de reaccionar amb por, el bosc perdia la seva forma.</p>
+                <p>Va tancar els ulls i, en lloc d'intentar veure amb la vista, va veure amb la seva resistència. Va percebre que el camí no estava "davant" seu, sinó "dins". El bosc s'alimentava de la seva reacció. Si ella deixava de reaccionar amb por, el bosc perdia la seva forma.</p>
 
-            <p>Va fer un pas cap a l'aigua. No es va enfonsar. La superfície era sòlida com el gel, malgrat que encara semblava líquida i fosca. Va caminar sobre el mirall de les seves pròpies pors, cada pas una afirmació de la seva existència. No necessitava que ningú la vegués per saber que era allà.</p>
-        </article>
+                <p>Va fer un pas cap a l'aigua. No es va enfonsar. La superfície era sòlida com el gel, malgrat que encara semblava líquida i fosca. Va caminar sobre el mirall de les seves pròpies pors, cada pas una afirmació de la seva existència. No necessitava que ningú la vegués per saber que era allà.</p>
+            </article>
 
-        <!-- CAPÍTOL 4: La Sortida -->
-        <article class="capitol" data-cap="4">
-            <h2>La Sortida sense Retorn</h2>
+            <!-- CAPÍTOL 4: La Sortida -->
+            <article class="capitol" data-cap="4">
+                <h2>La Sortida sense Retorn</h2>
 
-            <p>Quan va arribar a l'altra riba, el bosc va fer un últim intent. Els arbres van començar a plorar una saba negra i espessa, i l'aire es va tornar tan fred que l'alè de l'Elna es cristal·litzava davant seu. Però ella ja no mirava les ombres. Mantenia la seva màgia activa, una armadura invisible que repel·lia la desesperació.</p>
+                <p>Quan va arribar a l'altra riba, el bosc va fer un últim intent. Els arbres van començar a plorar una saba negra i espessa, i l'aire es va tornar tan fred que l'alè de l'Elna es cristal·litzava davant seu. Però ella ja no mirava les ombres. Mantenia la seva màgia activa, una armadura invisible que repel·lia la desesperació.</p>
 
-            <p>A poc a poc, la densitat de la vegetació va anar disminuint. La llum va canviar d'aquell lila opressiu a un gris albada, més natural, més honest. Els ocells, els de veritat, van començar a cantar en algun lloc llunyà.</p>
+                <p>A poc a poc, la densitat de la vegetació va anar disminuint. La llum va canviar d'aquell lila opressiu a un gris albada, més natural, més honest. Els ocells, els de veritat, van començar a cantar en algun lloc llunyà.</p>
 
-            <p>L'Elna va sortir del perímetre dels arbres més antics i es va trobar en un prat de gramínies altes, banyades per la rosada. Es va girar per mirar enrere. El bosc semblava ara una taca fosca i silenciosa sota el cel de matinada, imperturbable, guardant els seus secrets per al pròxim viatger.</p>
+                <p>L'Elna va sortir del perímetre dels arbres més antics i es va trobar en un prat de gramínies altes, banyades per la rosada. Es va girar per mirar enrere. El bosc semblava ara una taca fosca i silenciosa sota el cel de matinada, imperturbable, guardant els seus secrets per al pròxim viatger.</p>
 
-            <p>No se sentia victoriosa en el sentit clàssic. No portava cap tresor, ni havia après cap conjur nou. Però, quan es va mirar les mans, va notar que les puntes dels seus dits tenien una lleu claror argentada que no marxava. La seva màgia ja no era només una eina de defensa; s'havia integrat en ella, transformant la seva manera de veure el món.</p>
+                <p>No se sentia victoriosa en el sentit clàssic. No portava cap tresor, ni havia après cap conjur nou. Però, quan es va mirar les mans, va notar que les puntes dels seus dits tenien una lleu claror argentada que no marxava. La seva màgia ja no era només una eina de defensa; s'havia integrat en ella, transformant la seva manera de veure el món.</p>
 
-            <p>Havia entrat al bosc com una nena que temia la seva pròpia ombra i en sortia com algú que sabia que l'ombra era només una part de la llum. El camí cap a casa encara era llarg i el bosc de les veus seguiria allà, esperant a la frontera de la realitat. L'Elna va començar a caminar, sabent que, encara que el misteri del bosc no s'hagués resolt, ella ja no era la mateixa que s'hi havia perdut.</p>
-        </article>
+                <p>Havia entrat al bosc com una nena que temia la seva pròpia ombra i en sortia com algú que sabia que l'ombra era només una part de la llum. El camí cap a casa encara era llarg i el bosc de les veus seguiria allà, esperant a la frontera de la realitat. L'Elna va començar a caminar, sabent que, encara que el misteri del bosc no s'hagués resolt, ella ja no era la mateixa que s'hi havia perdut.</p>
+            </article>
 
-        <div class="epilog">
-            <p>Fi</p>
+            <div class="epilog">
+                <p>Fi</p>
+            </div>
+        </div>
+
+        <!-- CASTELLANO -->
+        <div class="idioma-content" id="content-es">
+            <!-- CAPÍTULO 1: La Pérdida -->
+            <article class="capitol" data-cap="1">
+                <h2>La Pérdida</h2>
+
+                <p>Elna no sabía exactamente cuándo se había perdido. No había habido una ruptura brusca, ni un camino que terminara de golpe. Simplemente, la claridad se había vuelto de un verde enfermizo y el olor a musgo húmedo se había tornado tan denso que parecía que se pudiera masticar. A sus doce años, Elna sabía que el bosque no quería devorarla, pero sí que quería que se quedara. Quería que fuera una estatua más en aquel museo de madera y silencio.</p>
+
+                <p>El aire era inmóvil, de una quietud artificial. En el suelo, las hojas secas no crujían bajo sus pies; se hundían en un lecho de podredumbre silenciosa. A pesar de la falta de viento, las ramas más altas de los robles se enroscaban entre sí, como dedos de ancianos que intentan recordar una caricia.</p>
+
+                <figure class="moment-visual" data-img="1">
+                    <img src="assets/images/moment1.jpg" alt="El abedul que observa">
+                    <figcaption class="peu-imatge">El abedul que observa</figcaption>
+                </figure>
+
+                <p>Elna se detuvo frente a un abedul de tronco blanco manchado de negro. Ya lo había visto. Tres veces. Lo reconocía por la herida en forma de ojo que se abría en la corteza, una mirada de madera que parecía juzgar su indecisión.</p>
+
+                <p>—No estoy dando círculos —susurró, más por escuchar su propia voz que por convicción.</p>
+
+                <p>Pero el bosque le respondió con su primera trampa. Su propia voz volvió a ella, pero deformada. No era un eco, era una parodia.</p>
+
+                <p><em>"...no estoy... no soy... no puedo..."</em>, se movieron las sombras entre los arbustos.</p>
+
+                <p>Elna cerró los ojos. Aquí es donde su magia, aquella llama tenue que su abuelo llamaba La Perseverancia, comenzaba a latir bajo su piel. No era una magia de luz radiante ni de bolas de fuego; era una resistencia sorda, una capacidad de filtrar la realidad del engaño. Puso la mano sobre su pecho y sintió su propio corazón, el único reloj fiable en aquel lugar donde el tiempo parecía haberse disuelto en la niebla.</p>
+            </article>
+
+            <!-- CAPÍTULO 2: El Espejo de las Voces -->
+            <article class="capitol" data-cap="2">
+                <h2>El Espejo de las Voces</h2>
+
+                <p>Mientras caminaba, la bruma comenzó a filtrarse entre los troncos como un gas frío. No era blanca, sino de un gris ceniza que lo desdibujaba todo. Elna vio siluetas. Allí, entre dos robles colosales, parecía haber la figura de su madre, de espaldas, cosiendo con hilos que eran telarañas.</p>
+
+                <p>—¿Mamá? —dijo, aun sabiendo que era imposible.</p>
+
+                <p><em>"Aún no eres lo suficientemente buena, Elna"</em>, dijo la figura sin girarse. La voz no venía de la silueta, sino de debajo de la tierra, como si las raíces hablaran. <em>"Te has perdido porque siempre has tenido miedo de decidir. Eres un pájaro sin alas, una bruja sin varita. ¿Qué piensas hacer cuando la noche caiga del todo?"</em></p>
+
+                <figure class="moment-visual" data-img="2">
+                    <img src="assets/images/moment2.jpg" alt="La figura de la madre">
+                    <figcaption class="peu-imatge">La trampa del bosque</figcaption>
+                </figure>
+
+                <p>Elna sintió una punzada en el pecho, una frialdad que no era climática. Era la duda. El bosque no utilizaba garras, utilizaba sus propios recuerdos, las inseguridades que guardaba bajo la cama antes de irse a dormir. Las voces se multiplicaron. Eran las voces de los niños del pueblo riéndose de ella, la voz de su maestro diciendo que su magia era <em>"demasiado sutil para ser útil"</em>.</p>
+
+                <p>—Basta —dijo Elna, plantando los pies en el suelo.</p>
+
+                <p>Activó su percepción. Dejó de escuchar las palabras y comenzó a "sentir" el origen del sonido. No eran voces humanas; era el roce de las hojas secas manipulado por su propio miedo. Con un esfuerzo de voluntad, imaginó una pared de cristal transparente alrededor de su corazón. Las voces golpeaban el cristal y se rompían como olas contra un acantilado.</p>
+
+                <p>El bosque, enfurecido por su resistencia, cambió de táctica. Los árboles comenzaron a moverse. No corrían, pero cuando Elna parpadeaba, los troncos se habían desplazado unos centímetros, cerrando el espacio, reduciendo el camino hasta que casi tenía que caminar de lado.</p>
+            </article>
+
+            <!-- CAPÍTULO 3: La Prueba del Vacío -->
+            <article class="capitol" data-cap="3">
+                <h2>La Prueba del Vacío</h2>
+
+                <p>Llegó a una clara donde la luz del sol, o lo que quedaba de ella, se filtraba en rayos morados y oblicuos. En el centro, un estanque de aguas negras e inmóviles la esperaba. Elna sabía que tenía que llegar al otro lado, pero no había puente, y el agua parecía no tener fondo.</p>
+
+                <p>Se sentó a la orilla. De repente, la soledad la golpeó con toda su fuerza. No había nadie para salvarla. Si se quedaba allí, se convertiría en una parte más del paisaje, una estatua de musgo y huesos. La tristeza era una niebla más pesada que la del bosque. Recordó todas las veces que se había sentido invisible en el mundo exterior.</p>
+
+                <figure class="moment-visual" data-img="3">
+                    <img src="assets/images/moment3.jpg" alt="El estanque negro">
+                    <figcaption class="peu-imatge">El espejo de los miedos</figcaption>
+                </figure>
+
+                <p><em>"Si nadie te ve, ¿existes realmente?"</em>, preguntó el bosque con un susurro de viento inexistente.</p>
+
+                <p>Elna miró su reflejo en el agua negra. No vio su cara, sino un vacío. Durante un momento, estuvo a punto de dejarse caer, de aceptar que el bosque tenía razón. Pero entonces notó una pequeña vibración en los dedos. Era su magia de percepción, captando algo que el bosque intentaba ocultar.</p>
+
+                <p>Bajo la capa de miedo y bajo el agua negra, había una verdad: el bosque no era un enemigo a vencer, sino un espejo que había que atravesar.</p>
+
+                <p>Cerró los ojos y, en lugar de intentar ver con la vista, vio con su resistencia. Percibió que el camino no estaba "delante" de ella, sino "dentro". El bosque se alimentaba de su reacción. Si ella dejaba de reaccionar con miedo, el bosque perdía su forma.</p>
+
+                <p>Dio un paso hacia el agua. No se hundió. La superficie era sólida como el hielo, a pesar de que aún parecía líquida y oscura. Caminó sobre el espejo de sus propios miedos, cada paso una afirmación de su existencia. No necesitaba que nadie la viera para saber que estaba allí.</p>
+            </article>
+
+            <!-- CAPÍTULO 4: La Salida -->
+            <article class="capitol" data-cap="4">
+                <h2>La Salida sin Retorno</h2>
+
+                <p>Cuando llegó a la otra orilla, el bosque hizo un último intento. Los árboles comenzaron a llorar una savia negra y espesa, y el aire se volvió tan frío que el aliento de Elna se cristalizaba ante ella. Pero ella ya no miraba las sombras. Mantenía su magia activa, una armadura invisible que repelía la desesperación.</p>
+
+                <p>Poco a poco, la densidad de la vegetación fue disminuyendo. La luz cambió de aquel lila opresivo a un gris alba, más natural, más honesto. Los pájaros, los de verdad, comenzaron a cantar en algún lugar lejano.</p>
+
+                <p>Elna salió del perímetro de los árboles más antiguos y se encontró en un prado de gramíneas altas, bañadas por el rocío. Se giró para mirar atrás. El bosque parecía ahora una mancha oscura y silenciosa bajo el cielo de madrugada, imperturbable, guardando sus secretos para el próximo viajero.</p>
+
+                <p>No se sentía victoriosa en el sentido clásico. No llevaba ningún tesoro, ni había aprendido ningún conjuro nuevo. Pero, cuando se miró las manos, notó que las puntas de sus dedos tenían una leve claridad plateada que no se iba. Su magia ya no era solo una herramienta de defensa; se había integrado en ella, transformando su manera de ver el mundo.</p>
+
+                <p>Había entrado al bosque como una niña que temía su propia sombra y salía como alguien que sabía que la sombra era solo una parte de la luz. El camino hacia casa aún era largo y el bosque de las voces seguiría allí, esperando en la frontera de la realidad. Elna comenzó a caminar, sabiendo que, aunque el misterio del bosque no se hubiera resuelto, ella ya no era la misma que se había perdido en él.</p>
+            </article>
+
+            <div class="epilog">
+                <p>Fin</p>
+            </div>
+        </div>
+
+        <!-- ENGLISH -->
+        <div class="idioma-content" id="content-en">
+            <!-- CHAPTER 1: The Loss -->
+            <article class="capitol" data-cap="1">
+                <h2>The Loss</h2>
+
+                <p>Elna didn't know exactly when she had gotten lost. There had been no sudden break, no path that ended abruptly. Simply, the light had turned a sickly green and the smell of damp moss had become so dense that it seemed almost chewable. At twelve years old, Elna knew the forest didn't want to devour her, but it did want her to stay. It wanted her to become another statue in that museum of wood and silence.</p>
+
+                <p>The air was motionless, of an artificial stillness. On the ground, the dry leaves didn't crunch beneath her feet; they sank into a bed of silent decay. Despite the lack of wind, the highest branches of the oaks twisted around each other, like the fingers of elders trying to remember a caress.</p>
+
+                <figure class="moment-visual" data-img="1">
+                    <img src="assets/images/moment1.jpg" alt="The watching birch">
+                    <figcaption class="peu-imatge">The watching birch</figcaption>
+                </figure>
+
+                <p>Elna stopped before a birch tree with a white trunk spotted with black. She had seen it before. Three times. She recognized it by the wound shaped like an eye that opened in the bark, a wooden gaze that seemed to judge her indecision.</p>
+
+                <p>"I'm not going in circles," she whispered, more to hear her own voice than out of conviction.</p>
+
+                <p>But the forest answered with its first trap. Her own voice returned to her, but deformed. It wasn't an echo, it was a parody.</p>
+
+                <p><em>"...I'm not... I am not... I cannot..."</em>, the shadows moved among the bushes.</p>
+
+                <p>Elna closed her eyes. This is where her magic, that faint flame her grandfather called The Perseverance, began to beat beneath her skin. It wasn't magic of radiant light or fireballs; it was a dull resistance, an ability to filter reality from deception. She placed her hand over her chest and felt her own heart, the only reliable clock in that place where time seemed to have dissolved into the fog.</p>
+            </article>
+
+            <!-- CHAPTER 2: The Mirror of Voices -->
+            <article class="capitol" data-cap="2">
+                <h2>The Mirror of Voices</h2>
+
+                <p>As she walked, the mist began to filter between the trunks like a cold gas. It wasn't white, but an ashen gray that blurred everything. Elna saw silhouettes. There, between two colossal oaks, there seemed to be the figure of her mother, with her back turned, sewing with threads that were cobwebs.</p>
+
+                <p>"Mother?" she said, even knowing it was impossible.</p>
+
+                <p><em>"You are not good enough yet, Elna,"</em> the figure said without turning around. The voice didn't come from the silhouette, but from beneath the earth, as if the roots were speaking. <em>"You are lost because you have always been afraid to decide. You are a bird without wings, a witch without a wand. What do you plan to do when night falls completely?"</em></p>
+
+                <figure class="moment-visual" data-img="2">
+                    <img src="assets/images/moment2.jpg" alt="The figure of the mother">
+                    <figcaption class="peu-imatge">The forest's trap</figcaption>
+                </figure>
+
+                <p>Elna felt a stab in her chest, a coldness that wasn't climatic. It was doubt. The forest didn't use claws, it used her own memories, the insecurities she kept under her bed before going to sleep. The voices multiplied. They were the voices of the village children laughing at her, the voice of her teacher saying her magic was <em>"too subtle to be useful"</em>.</p>
+
+                <p>"Enough," Elna said, planting her feet on the ground.</p>
+
+                <p>She activated her perception. She stopped listening to the words and began to "feel" the origin of the sound. They weren't human voices; it was the rustling of dry leaves manipulated by her own fear. With an effort of will, she imagined a wall of transparent glass around her heart. The voices struck the glass and broke like waves against a cliff.</p>
+
+                <p>The forest, enraged by her resistance, changed tactics. The trees began to move. They didn't run, but when Elna blinked, the trunks had shifted a few centimeters, closing the space, narrowing the path until she almost had to walk sideways.</p>
+            </article>
+
+            <!-- CHAPTER 3: The Trial of the Void -->
+            <article class="capitol" data-cap="3">
+                <h2>The Trial of the Void</h2>
+
+                <p>She reached a clearing where the sunlight, or what remained of it, filtered through in purple and oblique rays. In the center, a pond of black and motionless waters awaited her. Elna knew she had to reach the other side, but there was no bridge, and the water seemed to have no bottom.</p>
+
+                <p>She sat at the edge. Suddenly, loneliness struck her with all its force. There was no one to save her. If she stayed there, she would become part of the landscape, a statue of moss and bones. Sadness was a fog heavier than the forest's. She remembered all the times she had felt invisible in the outside world.</p>
+
+                <figure class="moment-visual" data-img="3">
+                    <img src="assets/images/moment3.jpg" alt="The black pond">
+                    <figcaption class="peu-imatge">The mirror of fears</figcaption>
+                </figure>
+
+                <p><em>"If no one sees you, do you really exist?"</em>, the forest asked with a whisper of nonexistent wind.</p>
+
+                <p>Elna looked at her reflection in the black water. She didn't see her face, but a void. For a moment, she was about to let herself fall, to accept that the forest was right. But then she noticed a small vibration in her fingers. It was her perception magic, catching something the forest was trying to hide.</p>
+
+                <p>Beneath the layer of fear and beneath the black water, there was a truth: the forest was not an enemy to defeat, but a mirror that had to be crossed.</p>
+
+                <p>She closed her eyes and, instead of trying to see with sight, she saw with her resistance. She perceived that the path was not "in front" of her, but "within". The forest fed on her reaction. If she stopped reacting with fear, the forest lost its form.</p>
+
+                <p>She took a step toward the water. She didn't sink. The surface was solid as ice, even though it still looked liquid and dark. She walked over the mirror of her own fears, each step an affirmation of her existence. She didn't need anyone to see her to know she was there.</p>
+            </article>
+
+            <!-- CHAPTER 4: The Exit -->
+            <article class="capitol" data-cap="4">
+                <h2>The Exit Without Return</h2>
+
+                <p>When she reached the other shore, the forest made one last attempt. The trees began to weep a thick black sap, and the air became so cold that Elna's breath crystallized before her. But she no longer looked at the shadows. She kept her magic active, an invisible armor that repelled despair.</p>
+
+                <p>Little by little, the density of the vegetation began to diminish. The light changed from that oppressive lilac to a dawn gray, more natural, more honest. The birds, the real ones, began to sing somewhere in the distance.</p>
+
+                <p>Elna stepped out from the perimeter of the oldest trees and found herself in a meadow of tall grasses, bathed in dew. She turned to look back. The forest now seemed like a dark and silent stain beneath the dawn sky, imperturbable, guarding its secrets for the next traveler.</p>
+
+                <p>She didn't feel victorious in the classical sense. She carried no treasure, nor had she learned any new spell. But when she looked at her hands, she noticed that the tips of her fingers had a faint silvery glow that wouldn't go away. Her magic was no longer just a tool of defense; it had integrated into her, transforming her way of seeing the world.</p>
+
+                <p>She had entered the forest as a girl who feared her own shadow and emerged as someone who knew that shadow was only a part of the light. The road home was still long and the forest of voices would remain there, waiting at the border of reality. Elna began to walk, knowing that, although the mystery of the forest had not been solved, she was no longer the same girl who had gotten lost in it.</p>
+            </article>
+
+            <div class="epilog">
+                <p>The End</p>
+            </div>
         </div>
 
     </main>
@@ -519,6 +780,38 @@
     </audio>
 
     <script>
+        // ========== PESTANYES D'IDIOMES ==========
+        const pestanyes = document.querySelectorAll('.pestanya');
+        const continguts = document.querySelectorAll('.idioma-content');
+
+        pestanyes.forEach(pestanya => {
+            pestanya.addEventListener('click', () => {
+                const idioma = pestanya.dataset.idioma;
+                
+                // Actualitzar pestanyes actives
+                pestanyes.forEach(p => p.classList.remove('active'));
+                pestanya.classList.add('active');
+                
+                // Mostrar contingut corresponent
+                continguts.forEach(c => {
+                    c.classList.remove('active');
+                    if (c.id === `content-${idioma}`) {
+                        c.classList.add('active');
+                    }
+                });
+                
+                // Reobservar elements per animacions
+                setTimeout(() => {
+                    document.querySelectorAll('.capitol, .moment-visual').forEach(el => {
+                        observer.observe(el);
+                        el.classList.remove('visible');
+                    });
+                    // Forzar verificación inicial
+                    checkVisibleElements();
+                }, 100);
+            });
+        });
+
         // ========== AUDIO ==========
         const audioBtn = document.getElementById('audioBtn');
         const bgAudio = document.getElementById('bgAudio');
@@ -563,15 +856,14 @@
             });
         }, observerOptions);
 
-        // Observar capítols
-        document.querySelectorAll('.capitol').forEach(capitol => {
-            observer.observe(capitol);
-        });
+        function checkVisibleElements() {
+            document.querySelectorAll('.capitol, .moment-visual').forEach(el => {
+                observer.observe(el);
+            });
+        }
 
-        // Observar imatges
-        document.querySelectorAll('.moment-visual').forEach(img => {
-            observer.observe(img);
-        });
+        // Observar capítols inicials
+        checkVisibleElements();
 
         // ========== PARTÍCULES (efecte de pols/boira) ==========
         const canvas = document.getElementById('particules');
