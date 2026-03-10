@@ -435,6 +435,38 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--color-accent);
         }
+    
+        /* ========== RESUM ========== */
+        .resum-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(20, 20, 20, 0.5);
+            border-left: 3px solid var(--color-accent);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .resum-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--color-llum);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resum-section h3::before {
+            content: "◈";
+            color: var(--color-accent);
+        }
+
+        .resum-section p {
+            text-align: justify;
+            hyphens: auto;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
     </style>
 </head>
 <body>
@@ -464,6 +496,7 @@
             <button class="pestanya active" data-idioma="ca">Català</button>
             <button class="pestanya" data-idioma="es">Castellano</button>
             <button class="pestanya" data-idioma="en">English</button>
+            <button class="pestanya" data-idioma="resum">Resum</button>
         </div>
     </div>
 
@@ -753,6 +786,29 @@
             <div class="epilog">
                 <p>The End</p>
             </div>
+        </div>
+
+    
+        <!-- RESUM / RESUMEN / SUMMARY -->
+        <div class="idioma-content" id="content-resum">
+            <article class="capitol" data-cap="resum">
+                <h2>Resum de la Història</h2>
+
+                <div class="resum-section">
+                    <h3>Català</h3>
+                    <p>Elna, una nena de dotze anys, es perd en un bosc misteriós que sembla viu i conscient. El bosc no vol devorar-la, sinó que vol que es quedi per sempre, convertida en una estàtua de fusta i silenci. Utilitzant la seva màgia de perseverança —una resistència sorda que li permet filtrar la realitat de l'engany—, Elna ha d'enfrontar-se a les trampes del bosc: veus que imiten els seus éssers estimats, ombres que juguen amb les seves inseguretats, i un estany negre que reflecteix els seus pitjors temors. A través de quatre proves, descobreix que el bosc és un mirall de les seves pròpies pors i que l'única manera de sortir és acceptar qui és realment. Quan finalment escapa, no porta cap tresor material, però la seva màgia s'ha integrat en ella, transformant-la per sempre. Ha entrat al bosc com una nena que temia la seva pròpia ombra i en surt com algú que sap que l'ombra és només una part de la llum.</p>
+                </div>
+
+                <div class="resum-section">
+                    <h3>Castellano</h3>
+                    <p>Elna, una niña de doce años, se pierde en un bosque misterioso que parece vivo y consciente. El bosque no quiere devorarla, sino que quiere que se quede para siempre, convertida en una estatua de madera y silencio. Utilizando su magia de perseverancia —una resistencia sorda que le permite filtrar la realidad del engaño—, Elna debe enfrentarse a las trampas del bosque: voces que imitan a sus seres queridos, sombras que juegan con sus inseguridades, y un estanque negro que refleja sus peores temores. A través de cuatro pruebas, descubre que el bosque es un espejo de sus propios miedos y que la única manera de salir es aceptar quién es realmente. Cuando finalmente escapa, no lleva ningún tesoro material, pero su magia se ha integrado en ella, transformándola para siempre. Había entrado al bosque como una niña que temía su propia sombra y sale como alguien que sabe que la sombra es solo una parte de la luz.</p>
+                </div>
+
+                <div class="resum-section">
+                    <h3>English</h3>
+                    <p>Elna, a twelve-year-old girl, gets lost in a mysterious forest that seems alive and conscious. The forest doesn't want to devour her, but rather wants her to stay forever, transformed into a statue of wood and silence. Using her magic of perseverance —a dull resistance that allows her to filter reality from deception—, Elna must face the forest's traps: voices that mimic her loved ones, shadows that play with her insecurities, and a black pond that reflects her worst fears. Through four trials, she discovers that the forest is a mirror of her own fears and that the only way out is to accept who she really is. When she finally escapes, she carries no material treasure, but her magic has integrated into her, transforming her forever. She had entered the forest as a girl who feared her own shadow and emerges as someone who knows that shadow is only a part of the light.</p>
+                </div>
+            </article>
         </div>
 
     </main>
