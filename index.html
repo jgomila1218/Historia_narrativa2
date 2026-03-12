@@ -645,7 +645,7 @@
 
                 <p>—Basta —dijo Elna, plantando los pies en el suelo.</p>
 
-                <p>Activó su percepción. Dejó de escuchar las palabras y comenzó a "sentir" el origen del sonido. No eran voces humanas; era el roce de las hojas secas manipulado por su propio miedo. Con un esfuerzo de voluntad, imaginó una pared de cristal transparente alrededor de su corazón. Las voces golpeaban el cristal y se rompían como olas contra un acantilado.</p>
+                <p>Activó su percepción. Dejó de escuchar las palabras y comenzó a "sentir" el origen del sonido. No eran voces humanas; era el roce de las hojas secas manipulado por su propio miedo. Con un esforzo de voluntad, imaginó una pared de cristal transparente alrededor de su corazón. Las voces golpeaban el cristal y se rompían como olas contra un acantilado.</p>
 
                 <p>El bosque, enfurecido por su resistencia, cambió de táctica. Los árboles comenzaron a moverse. No corrían, pero cuando Elna parpadeaba, los troncos se habían desplazado unos centímetros, cerrando el espacio, reduciendo el camino hasta que casi tenía que caminar de lado.</p>
             </article>
@@ -684,9 +684,7 @@
 
                 <p>Elna salió del perímetro de los árboles más antiguos y se encontró en un prado de gramíneas altas, bañadas por el rocío. Se giró para mirar atrás. El bosque parecía ahora una mancha oscura y silenciosa bajo el cielo de madrugada, imperturbable, guardando sus secretos para el próximo viajero.</p>
 
-                <p>No se sentía victoriosa en el sentido clásico. No llevaba ningún tesoro, ni había aprendido ningún conjuro nuevo. Pero, cuando se miró las manos, notó que las puntas de sus dedos tenían una leve claridad plateada que no se iba. Su magia ya no era solo una herramienta de defensa; se había integrado en ella, transformando su manera de ver el mundo.</p>
-
-                <p>Había entrado al bosque como una niña que temía su propia sombra y salía como alguien que sabía que la sombra era solo una parte de la luz. El camino hacia casa aún era largo y el bosque de las voces seguiría allí, esperando en la frontera de la realidad. Elna comenzó a caminar, sabiendo que, aunque el misterio del bosque no se hubiera resuelto, ella ya no era la misma que se había perdido en él.</p>
+                <p>No se sentía victoriosa en el sentido clásico. No llevaba ningún tesoro, ni había aprendido ningún conjuro nuevo. Pero, cuando se miró las manos, notó que las puntas de sus dedos tenían una leve claridad plateada que no se iba. Su magia ya no era solo una herramienta de defensa; se había integrado en ella, transformándola para siempre. Había entrado al bosque como una niña que temía su propia sombra y sale como alguien que sabe que la sombra es solo una parte de la luz.</p>
             </article>
 
             <div class="epilog">
@@ -815,14 +813,16 @@
 
     <!-- Control d'àudio -->
     <div class="audio-control" id="audioBtn" title="Activar/Desactivar so ambient">
+        <!-- Icono de SONIDO (se muestra cuando el audio está PARADO - para activarlo) -->
         <svg id="icon-sound" viewBox="0 0 24 24">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-        <svg id="icon-mute" viewBox="0 0 24 24" style="display: none;">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <line x1="23" y1="9" x2="17" y2="15"></line>
             <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <!-- Icono de MUTE (se muestra cuando el audio está SONANDO - para silenciarlo) -->
+        <svg id="icon-mute" viewBox="0 0 24 24" style="display: none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
         </svg>
     </div>
 
@@ -871,31 +871,58 @@
         // ========== AUDIO ==========
         const audioBtn = document.getElementById('audioBtn');
         const bgAudio = document.getElementById('bgAudio');
-        const iconSound = document.getElementById('icon-sound');
-        const iconMute = document.getElementById('icon-mute');
+        const iconSound = document.getElementById('icon-sound');      // Icono de altavoz (para activar)
+        const iconMute = document.getElementById('icon-mute');        // Icono de mute (para silenciar)
         const indicator = document.getElementById('audioIndicator');
         let isPlaying = false;
 
-        audioBtn.addEventListener('click', () => {
+        function updateAudioState(playing) {
+            isPlaying = playing;
+            
             if (isPlaying) {
-                bgAudio.pause();
-                audioBtn.classList.remove('active');
-                audioBtn.classList.add('mute');
+                // Audio SONANDO: mostrar icono de MUTE (para poder silenciar)
+                iconSound.style.display = 'none';
+                iconMute.style.display = 'block';
+                audioBtn.classList.add('active');
+                audioBtn.classList.remove('mute');
+            } else {
+                // Audio PARADO: mostrar icono de SONIDO (para poder activar)
                 iconSound.style.display = 'block';
                 iconMute.style.display = 'none';
+                audioBtn.classList.remove('active');
+                audioBtn.classList.add('mute');
+            }
+        }
+
+        function toggleAudio() {
+            if (isPlaying) {
+                // Está sonando, lo pausamos
+                bgAudio.pause();
+                updateAudioState(false);
             } else {
+                // Está parado, lo activamos
                 bgAudio.play().then(() => {
-                    audioBtn.classList.add('active');
-                    audioBtn.classList.remove('mute');
-                    iconSound.style.display = 'none';
-                    iconMute.style.display = 'block';
+                    updateAudioState(true);
+                    // Mostrar indicador
                     indicator.classList.add('visible');
                     setTimeout(() => indicator.classList.remove('visible'), 2000);
                 }).catch(e => {
-                    console.log('Autoplay blocked:', e);
+                    console.log('Error al reproducir audio:', e);
                 });
             }
-            isPlaying = !isPlaying;
+        }
+
+        audioBtn.addEventListener('click', toggleAudio);
+
+        // ========== AUTOPLAY AL CARREGAR ==========
+        // Intentar activar el audio automàticament quan la pàgina carrega
+        window.addEventListener('load', () => {
+            // Petita demora per assegurar que tot està llest
+            setTimeout(() => {
+                if (!isPlaying) {
+                    toggleAudio();
+                }
+            }, 500);
         });
 
         // ========== ANIMACIONS SCROLL ==========
